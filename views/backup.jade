@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    script.
+        function up() {
+        alert('Hello')
+        }
+
+    h1 Searching Types
+    p You searched for types containing the properties '#{term}'
+    h2 Result
+    if other
+        -var numResults = other.hits.total
+        #numResults
+        p Number of hits #{numResults}
+            br
+            -for (var i = 0; i < numResults; i++) {
+                br
+                b.typeResults Type #{i+1}
+                pre= JSON.stringify(other.hits.hits[i]._source, null, ' ')
+                br
+                hr
+                br
+            -}
+    else
+        p No Matches
+    button(onclick='something()') Prev
+    button(onclick='something()') Next
+    br
+    br
+    a(href='/') Search again

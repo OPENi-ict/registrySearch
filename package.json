@@ -1,0 +1,15 @@
+{
+  "name": "openi-registry-search",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.5.0",
+    "jade": "*",
+    "elasticsearch": "~1.5.14",
+    "request": "~2.34.0"
+  },
+  "devDependencies": {}
+}
