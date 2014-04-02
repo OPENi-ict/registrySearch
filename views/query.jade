@@ -1,29 +1,6 @@
 extends layout
 
 block content
-    //- script.
-    //-     var qArray = ["Who is my dog?", 
-    //-        "who is the prez?", 
-    //-        "Who is my girlfriend?", 
-    //-        "Who am I?"];
-
-
-    //-     var index = 0;
-    //-     var dummy = other;
-    //-     function iter_onclick() {
-    //-         //if this is the last question hide and displays quiz ends            
-    //-         if (index >= qArray.length) {
-    //-             document.getElementById('qArray').innerHTML = '<div>Quiz End, Thank you</div>'
-    //-             document.getElementById('myButton').style.visibility = 'hidden ';
-    //-             return false;
-    //-         }
-
-    //-     var html = ' <div> ' + dummy + ' </div> ';
-        
-    //-     document.getElementById('qArray').innerHTML = html;
-
-    //-     index++;
-    //-     }
 
     h1 Searching Types
     p You searched for types containing the properties '#{term}'
@@ -31,34 +8,24 @@ block content
     if other
         -var numResults = other.hits.total
         -var dummy = other
-        //- -var dummy = ["one", "two", "three", "four", "five"]
         #numResults
         p Number of hits #{numResults}
-            //- br
-            //- -for (var i = 0; i < numResults; i++) {
-            //-     br
-            //-     b.typeResults Type #{i+1}
-            //-     pre= JSON.stringify(other.hits.hits[i]._source, null, ' ')
-            //-     br
-            //-     hr
-            //-     br
-            //- -}
+        p(id="typeNum") Type Number 1
+        pre(id="qArray")= JSON.stringify(dummy.hits.hits[0]._source, null, ' ')
     else
         p No Matches
-    //- br
-    //- br
-    //- a(href='/') Search again
-    //- br
-    //- br
-    //- br
-
+    div.buttons
+        input(type="button" value="Prev" id="prevButton" onclick="prev('#{dummy}')")
+        input(type="button" value="Next" id="nextButton" onclick="next('#{dummy}')")
+        br
+        br
+        a(href='/') Search again
     script.
         var index = 0;
         function next(dummy) {
             index++;
             var dummy = !{JSON.stringify(dummy)};
             console.log(dummy.hits.total);
-            //- if this is the last question hide and displays quiz ends            
             if (index >= dummy.hits.total) {
                 document.getElementById('qArray').innerHTML = '<div><p class="warning">No more results</p></div>'
                 document.getElementById('typeNum').innerHTML = '';
@@ -74,7 +41,6 @@ block content
         function prev(dummy) {
             index = index - 1;
             var dummy = !{JSON.stringify(dummy)};
-            //- if this is the last question hide and displays quiz ends            
             if (index <= -1) {
                 document.getElementById('qArray').innerHTML = '<div><p class="warning">No more results</p></div>'
                 document.getElementById('typeNum').innerHTML = '';
@@ -87,16 +53,6 @@ block content
             document.getElementById('typeNum').innerHTML = '<p>Type Number ' + (index+1) +  '</p>';
         }
 
-
-    p(id="typeNum") Type Number 1
-    pre(id="qArray")= JSON.stringify(dummy.hits.hits[0]._source, null, ' ')
-    br
-    br
-    div.buttons
-        input(type="button" value="Prev" id="prevButton" onclick="prev('#{dummy}')")
-        input(type="button" value="Next" id="nextButton" onclick="next('#{dummy}')")
-        br
-        br
-        a(href='/') Search again
+    
 
 
