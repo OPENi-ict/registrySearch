@@ -32,3 +32,17 @@ fieldset {
 .typeResults {
   color: #74C69D;
 }
+
+.warning {
+  color: red;
+}
+
+#typeNum {
+  color:  #74C69D;
+}
+
+.buttons {
+   position:absolute;
+    transition: .5s ease;
+    top: 70%;
+}

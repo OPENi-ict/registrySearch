@@ -60,13 +60,15 @@ block content
             console.log(dummy.hits.total);
             //- if this is the last question hide and displays quiz ends            
             if (index >= dummy.hits.total) {
-                document.getElementById('qArray').innerHTML = '<div>No more results</div>'
+                document.getElementById('qArray').innerHTML = '<div><p class="warning">No more results</p></div>'
+                document.getElementById('typeNum').innerHTML = '';
                 index = dummy.hits.total;
                 return false;
             }
 
             var html = '<pre>' + JSON.stringify(dummy.hits.hits[index]._source, null, ' ') + '</pre>';
             document.getElementById('qArray').innerHTML = html;
+            document.getElementById('typeNum').innerHTML = '<p>Type Number ' + (index+1) +  '</p>';
         }
 
         function prev(dummy) {
@@ -74,24 +76,27 @@ block content
             var dummy = !{JSON.stringify(dummy)};
             //- if this is the last question hide and displays quiz ends            
             if (index <= -1) {
-                document.getElementById('qArray').innerHTML = '<div>No more results</div>'
+                document.getElementById('qArray').innerHTML = '<div><p class="warning">No more results</p></div>'
+                document.getElementById('typeNum').innerHTML = '';
                 index = -1;
                 return false;
             }
 
             var html = '<pre>' + JSON.stringify(dummy.hits.hits[index]._source, null, ' ') + '</pre>';
             document.getElementById('qArray').innerHTML = html;
+            document.getElementById('typeNum').innerHTML = '<p>Type Number ' + (index+1) +  '</p>';
         }
 
 
-
+    p(id="typeNum") Type Number 1
     pre(id="qArray")= JSON.stringify(dummy.hits.hits[0]._source, null, ' ')
     br
     br
-    input(type="button" value="Prev" id="prevButton" onclick="prev('#{dummy}')")
-    input(type="button" value="Next" id="nextButton" onclick="next('#{dummy}')")
-    br
-    br
-    a(href='/') Search again
+    div.buttons
+        input(type="button" value="Prev" id="prevButton" onclick="prev('#{dummy}')")
+        input(type="button" value="Next" id="nextButton" onclick="next('#{dummy}')")
+        br
+        br
+        a(href='/') Search again
 
 
