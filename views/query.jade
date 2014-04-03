@@ -1,0 +1,58 @@
+extends layout
+
+block content
+
+    h1 Searching Types
+    p You searched for types containing the properties '#{term}'
+    h2 Result
+    if other
+        -var numResults = other.hits.total
+        -var results = other
+        #numResults
+        p Number of hits #{numResults}
+        p(id="typeNum") Type Number 1
+        pre(id="qArray")= JSON.stringify(results.hits.hits[0]._source, null, ' ')
+    else
+        p No Matches
+    div.buttons
+        input(type="button" value="Prev" id="prevButton" onclick="prev('#{results}')")
+        input(type="button" value="Next" id="nextButton" onclick="next('#{results}')")
+        br
+        br
+        a(href='/') Search again
+    script.
+        var index = 0;
+        function next(results) {
+            index++;
+            var results = !{JSON.stringify(results)};
+            console.log(results.hits.total);
+            if (index >= results.hits.total) {
+                document.getElementById('qArray').innerHTML = '<div><p class="warning">No more results</p></div>'
+                document.getElementById('typeNum').innerHTML = '';
+                index = results.hits.total;
+                return false;
+            }
+
+            var html = '<pre>' + JSON.stringify(results.hits.hits[index]._source, null, ' ') + '</pre>';
+            document.getElementById('qArray').innerHTML = html;
+            document.getElementById('typeNum').innerHTML = '<p>Type Number ' + (index+1) +  '</p>';
+        }
+
+        function prev(results) {
+            index = index - 1;
+            var results = !{JSON.stringify(results)};
+            if (index <= -1) {
+                document.getElementById('qArray').innerHTML = '<div><p class="warning">No more results</p></div>'
+                document.getElementById('typeNum').innerHTML = '';
+                index = -1;
+                return false;
+            }
+
+            var html = '<pre>' + JSON.stringify(results.hits.hits[index]._source, null, ' ') + '</pre>';
+            document.getElementById('qArray').innerHTML = html;
+            document.getElementById('typeNum').innerHTML = '<p>Type Number ' + (index+1) +  '</p>';
+        }
+
+    
+
+
