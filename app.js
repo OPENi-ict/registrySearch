@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-
-
 var express = require('express');
 var routes  = require('./routes');
 var query = require('./routes/query');
