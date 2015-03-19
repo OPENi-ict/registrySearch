@@ -2,13 +2,12 @@ extends layout
 
 block content
     h1 OPENi Registry Search
-    p Search the registry for particular types using the input field below.
-    p Currently you can search for types by terms(s) or by ID, e.g.
+    p Search for relevant OPENi objects/types
+    p Currently you can search for objects/types by terms(s)
         ul
             li name
             li age
             li name <em>and</em> age 
-            li http://dbpedia.org/page/Age
     br
     br
     form(method='post', action='/')
@@ -17,8 +16,4 @@ block content
             p
                 label Search via Term(s)
                 input(name='search_term', placeholder='Enter terms')
-                input(type='submit', value='Search!')
-            p
-                label Search via ID
-                input(name='search_id', placeholder='Enter id')
                 input(type='submit', value='Search!')

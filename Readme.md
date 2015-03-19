@@ -2,6 +2,7 @@
 
 ## Setup
 
-With Elasticsearch running, set the Elasticsearch IP in config.json.
+`npm install` & `npm start`
 
-Then start the app via `npm start`
+## Current Functionality
+
