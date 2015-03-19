@@ -5,13 +5,10 @@ block content
     h1 Searching Types
     p You searched for types containing the properties '#{term}'
     h2 Result
-    if other
-        -var numResults = other.hits.total
-        -var results = other
-        #numResults
+    if result
+        -var results = result
         p Number of hits #{numResults}
-        p(id="typeNum") Type Number 1
-        pre(id="qArray")= JSON.stringify(results.hits.hits[0]._source, null, ' ')
+        pre(id="qArray")= JSON.stringify(result.hits.hits[0]._source, null, ' ')
     else
         p No Matches
     div.buttons
